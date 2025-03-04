@@ -15,7 +15,11 @@ describe('AppointmentsController', () => {
   });
 
   it('should create an appointment', async () => {
-    const dto = { user_name: 'Test', email: 'test@example.com', date_time: new Date('2024-05-15T09:00:00').toISOString() };
+    const dto = {
+      user_name: 'Test',
+      email: 'test@example.com',
+      date_time: new Date('2024-05-15T09:00:00').toISOString(),
+    };
     const result = await controller.create(dto);
     expect(result).toBeDefined();
   });
