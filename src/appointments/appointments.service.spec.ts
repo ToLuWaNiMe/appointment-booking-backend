@@ -1,6 +1,7 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { ConflictException } from '@nestjs/common';
 import { AppointmentsService } from './appointments.service';
+import { CreateAppointmentDto } from './dto/create-appointment.dto';
 
 describe('AppointmentsService', () => {
   let service: AppointmentsService;
@@ -12,10 +13,15 @@ describe('AppointmentsService', () => {
 
     service = module.get<AppointmentsService>(AppointmentsService);
   });
-
   it('should reject invalid time slots', async () => {
-    const invalidSlot = new Date('2024-05-15T07:30:00'); // Outside business hours
-    await expect(service.create({ date_time: invalidSlot } as any))
-      .rejects.toThrow(ConflictException);
+    const invalidSlot: string = '2023-10-10T10:00:00Z';
+    const createAppointmentDto: CreateAppointmentDto = {
+      date_time: invalidSlot,
+      user_name: 'testUser',
+      email: 'test@example.com',
+    };
+    await expect(service.create(createAppointmentDto)).rejects.toThrow(
+      ConflictException,
+    );
   });
 });

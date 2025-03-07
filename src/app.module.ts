@@ -4,6 +4,7 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { AppointmentsModule } from './appointments/appointments.module';
+import { Appointment } from './appointments/appointment.entity';
 
 @Module({
   imports: [
@@ -19,7 +20,7 @@ import { AppointmentsModule } from './appointments/appointments.module';
         username: configService.get<string>('DB_USERNAME'),
         password: configService.get<string>('DB_PASSWORD'),
         database: configService.get<string>('DB_DATABASE'),
-        entities: [], // Add entities here
+        entities: [Appointment], // Add entities here
         synchronize: true,
       }),
       inject: [ConfigService],
